@@ -27,14 +27,14 @@ const Hero = () => {
       <div className="absolute inset-0 bg-black/30"></div>
       
       <motion.div 
-        className="relative z-10 text-left max-w-2xl"
+        className="relative z-10 text-left max-w-2xl px-4 sm:px-6"
         style={{ marginLeft: 'calc(max(1rem, (100vw - 1280px) / 2) + 1rem)' }}
         variants={staggerContainer}
         initial="initial"
         animate="animate"
       >
         <motion.h1 
-          className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 sm:mb-6 leading-tight"
           variants={fadeInUp}
         >
           Bienvenidos a<br />
@@ -42,14 +42,14 @@ const Hero = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl text-white mb-8 max-w-lg"
+          className="text-lg sm:text-xl md:text-2xl text-white mb-6 sm:mb-8 max-w-lg leading-relaxed"
           variants={fadeInUp}
         >
           Tu mejor opción para celebraciones de cumpleaños infantiles, eventos para colegios y jardines infantiles
         </motion.p>
         
         <motion.div 
-          className="flex flex-row gap-4 items-center"
+          className="flex flex-col sm:flex-row gap-3 sm:gap-4 items-stretch sm:items-center"
           variants={fadeInUp}
         >
           <motion.button
@@ -58,7 +58,7 @@ const Hero = () => {
             onClick={() => {
               const element = document.getElementById('servicios')
               if (element) {
-                const navHeight = 152
+                const navHeight = 172
                 const elementPosition = element.offsetTop - navHeight
                 window.scrollTo({
                   top: elementPosition,
@@ -66,7 +66,7 @@ const Hero = () => {
                 })
               }
             }}
-            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-md text-base transition-colors duration-200 flex items-center group"
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-md text-sm sm:text-base transition-colors duration-200 flex items-center justify-center group w-full sm:w-auto"
           >
             Ver Servicios
             <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
@@ -78,7 +78,7 @@ const Hero = () => {
             onClick={() => {
               const element = document.getElementById('contacto')
               if (element) {
-                const navHeight = 152
+                const navHeight = 172
                 const elementPosition = element.offsetTop - navHeight
                 window.scrollTo({
                   top: elementPosition,
@@ -86,7 +86,7 @@ const Hero = () => {
                 })
               }
             }}
-            className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-semibold py-3 px-6 rounded-md text-base transition-colors duration-200"
+            className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-semibold py-3 px-6 rounded-md text-sm sm:text-base transition-colors duration-200 w-full sm:w-auto text-center"
           >
             Contáctanos
           </motion.button>

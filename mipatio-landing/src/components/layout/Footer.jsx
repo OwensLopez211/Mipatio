@@ -16,7 +16,7 @@ const Footer = () => {
         setTimeout(() => {
           const element = document.getElementById(elementId)
           if (element) {
-            const navHeight = 152
+            const navHeight = 172
             const elementPosition = element.offsetTop - navHeight
             window.scrollTo({
               top: elementPosition,

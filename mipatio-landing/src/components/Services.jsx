@@ -41,28 +41,28 @@ const Services = () => {
   return (
     <div>
       {/* Header con separador ondulado */}
-      <div className="bg-blue-900 text-white py-8">
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-2">Servicios</h1>
+      <div className="bg-blue-900 text-white py-6 sm:py-8">
+        <div className="text-center px-4">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-2">Servicios</h1>
         </div>
       </div>
 
       {/* Servicio Base Section */}
-      <section id="servicios" className="py-12 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
+      <section id="servicios" className="py-8 sm:py-12 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-6 sm:mb-8"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
               Servicio Base
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -85,16 +85,16 @@ const Services = () => {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="space-y-3"
+              className="space-y-2 sm:space-y-3"
             >
               {baseServiceFeatures.map((feature, index) => (
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="flex items-start space-x-3 text-sm"
+                  className="flex items-start space-x-2 sm:space-x-3 text-xs sm:text-sm"
                 >
                   <div className="bg-green-100 rounded-full p-1 mt-0.5 flex-shrink-0">
-                    <Check className="text-green-600" size={12} />
+                    <Check className="text-green-600" size={10} />
                   </div>
                   <p className="text-gray-700 leading-relaxed">{feature}</p>
                 </motion.div>
@@ -105,36 +105,36 @@ const Services = () => {
       </section>
 
       {/* Servicios adicionales Section */}
-      <section id="servicios-adicionales" className="py-12 bg-white">
-        <div className="max-w-7xl mx-auto px-6 md:px-8">
+      <section id="servicios-adicionales" className="py-8 sm:py-12 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-8"
+            className="text-center mb-6 sm:mb-8"
           >
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-2 sm:mb-4">
               Servicios adicionales
             </h2>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8 items-center">
             <motion.div
               variants={staggerContainer}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="space-y-3"
+              className="space-y-2 sm:space-y-3"
             >
               {additionalServices.map((service, index) => (
                 <motion.div
                   key={index}
                   variants={fadeInUp}
-                  className="flex items-start space-x-3 text-sm"
+                  className="flex items-start space-x-2 sm:space-x-3 text-xs sm:text-sm"
                 >
                   <div className="bg-blue-100 rounded-full p-1 mt-0.5 flex-shrink-0">
-                    <Check className="text-blue-600" size={12} />
+                    <Check className="text-blue-600" size={10} />
                   </div>
                   <p className="text-gray-700 leading-relaxed">{service}</p>
                 </motion.div>

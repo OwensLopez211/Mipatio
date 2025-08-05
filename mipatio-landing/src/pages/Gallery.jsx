@@ -69,15 +69,15 @@ const Gallery = () => {
       className="min-h-screen"
     >
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-20 pt-44">
-        <div className="max-w-4xl mx-auto text-center px-4">
+      <section className="bg-blue-900 text-white py-12 sm:py-20 pt-48 sm:pt-52">
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">Galería</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">Galería</h1>
+            <p className="text-base sm:text-lg md:text-xl text-blue-100 max-w-2xl mx-auto leading-relaxed">
               Nuestros mejores momentos capturados. Cada celebración es única y especial.
             </p>
           </motion.div>
@@ -85,7 +85,7 @@ const Gallery = () => {
       </section>
 
       {/* Gallery Grid - Diseño Mosaico */}
-      <section className="py-20 bg-white">
+      <section className="py-12 sm:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Primera fila - Mosaico principal */}
           <motion.div
@@ -93,7 +93,7 @@ const Gallery = () => {
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8"
           >
             {/* Imagen grande izquierda */}
             <motion.div
@@ -121,7 +121,7 @@ const Gallery = () => {
             </motion.div>
 
             {/* Grid derecho - 4 imágenes pequeñas */}
-            <div className="grid grid-cols-2 gap-4 h-full">
+            <div className="grid grid-cols-2 gap-2 sm:gap-4 h-full">
               {galleryImages.slice(1, 5).map((image, index) => (
                 <motion.div
                   key={image.id}
@@ -163,10 +163,10 @@ const Gallery = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="text-center py-12"
+            className="text-center py-8 sm:py-12"
           >
-            <div className="bg-gray-800 text-white py-4 px-8 rounded-lg inline-block">
-              <p className="text-lg font-medium">Porque la presentación es importante para el recuerdo</p>
+            <div className="bg-gray-800 text-white py-3 sm:py-4 px-4 sm:px-8 rounded-lg inline-block mx-4">
+              <p className="text-sm sm:text-lg font-medium">Porque la presentación es importante para el recuerdo</p>
             </div>
           </motion.div>
 

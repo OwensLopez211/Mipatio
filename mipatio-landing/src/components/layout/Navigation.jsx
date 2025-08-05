@@ -20,7 +20,7 @@ const Navigation = () => {
         setTimeout(() => {
           const element = document.getElementById(elementId)
           if (element) {
-            const navHeight = 152
+            const navHeight = 172
             const elementPosition = element.offsetTop - navHeight
             window.scrollTo({
               top: elementPosition,
@@ -67,7 +67,7 @@ const Navigation = () => {
   return (
     <nav className="bg-[#246C96] shadow-lg fixed w-full top-11 z-40">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-27">
+        <div className="flex justify-between h-32">
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0">
               <motion.div
@@ -159,35 +159,97 @@ const Navigation = () => {
         className="md:hidden bg-[#1F5D85] overflow-hidden"
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navigation.map((item) => (
-            item.href.startsWith('/#') ? (
+          <Link
+            to="/"
+            className={`text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+              location.pathname === '/' ? 'text-red-500' : ''
+            }`}
+            onClick={() => {
+              setIsOpen(false)
+              if (location.pathname !== '/') {
+                window.scrollTo(0, 0)
+              }
+            }}
+          >
+            Inicio
+          </Link>
+          
+          <Link
+            to="/galeria"
+            className={`text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
+              location.pathname === '/galeria' ? 'text-red-500' : ''
+            }`}
+            onClick={() => {
+              setIsOpen(false)
+              window.scrollTo(0, 0)
+            }}
+          >
+            Galería
+          </Link>
+          
+          <button
+            onClick={() => {
+              handleNavClick('/#infraestructura')
+              setIsOpen(false)
+            }}
+            className="text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 w-full text-left"
+          >
+            Infraestructura
+          </button>
+          
+          <div className="space-y-1">
+            <div className="flex">
               <button
-                key={item.name}
                 onClick={() => {
-                  handleNavClick(item.href)
+                  handleNavClick('/#servicios')
                   setIsOpen(false)
                 }}
-                className="text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 w-full text-left"
+                className="text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 flex-1 text-left"
               >
-                {item.name}
+                Servicios
               </button>
-            ) : (
-              <Link
-                key={item.name}
-                to={item.href}
-                className={`text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 ${
-                  location.pathname === item.href ? 'text-red-500' : ''
-                }`}
-                onClick={() => {
-                  setIsOpen(false)
-                  // Reset scroll position immediately for new page navigation
-                  window.scrollTo(0, 0)
-                }}
+              <button
+                onClick={() => setServicesOpen(!servicesOpen)}
+                className="text-white hover:text-red-500 px-2 py-2 rounded-md text-base font-medium transition-colors duration-200"
               >
-                {item.name}
-              </Link>
-            )
-          ))}
+                <ChevronDown size={16} className={`transform transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+            </div>
+            {servicesOpen && (
+              <div className="ml-4 space-y-1">
+                <button
+                  onClick={() => {
+                    handleNavClick('/#servicios')
+                    setServicesOpen(false)
+                    setIsOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-sm text-gray-300 hover:text-red-500"
+                >
+                  Servicio Base
+                </button>
+                <button
+                  onClick={() => {
+                    handleNavClick('/#servicios-adicionales')
+                    setServicesOpen(false)
+                    setIsOpen(false)
+                  }}
+                  className="block w-full text-left px-3 py-2 text-sm text-gray-300 hover:text-red-500"
+                >
+                  Servicios Adicionales
+                </button>
+              </div>
+            )}
+          </div>
+          
+          <button
+            onClick={() => {
+              handleNavClick('/#contacto')
+              setIsOpen(false)
+            }}
+            className="text-white hover:text-red-500 block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200 w-full text-left"
+          >
+            Contáctanos
+          </button>
         </div>
       </motion.div>
     </nav>
