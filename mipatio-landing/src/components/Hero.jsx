@@ -49,12 +49,23 @@ const Hero = () => {
         </motion.p>
         
         <motion.div 
-          className="flex flex-col gap-3 items-start"
+          className="flex flex-row gap-4 items-center"
           variants={fadeInUp}
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const element = document.getElementById('servicios')
+              if (element) {
+                const navHeight = 152
+                const elementPosition = element.offsetTop - navHeight
+                window.scrollTo({
+                  top: elementPosition,
+                  behavior: 'smooth'
+                })
+              }
+            }}
             className="bg-red-500 hover:bg-red-600 text-white font-semibold py-3 px-6 rounded-md text-base transition-colors duration-200 flex items-center group"
           >
             Ver Servicios
@@ -64,6 +75,17 @@ const Hero = () => {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => {
+              const element = document.getElementById('contacto')
+              if (element) {
+                const navHeight = 152
+                const elementPosition = element.offsetTop - navHeight
+                window.scrollTo({
+                  top: elementPosition,
+                  behavior: 'smooth'
+                })
+              }
+            }}
             className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-black font-semibold py-3 px-6 rounded-md text-base transition-colors duration-200"
           >
             Contáctanos

@@ -1,13 +1,56 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react'
 
 const Footer = () => {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleNavClick = (href) => {
+    if (href.startsWith('/#')) {
+      const elementId = href.slice(2)
+      
+      // Si no estamos en la página principal, navegar primero
+      if (location.pathname !== '/') {
+        navigate('/')
+        // Esperar más tiempo para que la página se cargue completamente
+        setTimeout(() => {
+          const element = document.getElementById(elementId)
+          if (element) {
+            const navHeight = 152
+            const elementPosition = element.offsetTop - navHeight
+            window.scrollTo({
+              top: elementPosition,
+              behavior: 'smooth'
+            })
+            // Trigger scroll event para activar animaciones
+            window.dispatchEvent(new Event('scroll'))
+          }
+        }, 500)
+      } else {
+        // Ya estamos en la página principal, hacer scroll directamente
+        const element = document.getElementById(elementId)
+        if (element) {
+          const navHeight = 152
+          const elementPosition = element.offsetTop - navHeight
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth'
+          })
+          // Trigger scroll event para activar animaciones
+          setTimeout(() => {
+            window.dispatchEvent(new Event('scroll'))
+          }, 100)
+        }
+      }
+    }
+  }
+
   const menuItems = [
     { name: 'Inicio', href: '/' },
     { name: 'Galería', href: '/galeria' },
-    { name: 'Infraestructura', href: '/infraestructura' },
-    { name: 'Servicios', href: '/servicios' },
-    { name: 'Contáctanos', href: '/contacto' }
+    { name: 'Infraestructura', href: '/#infraestructura' },
+    { name: 'Servicios', href: '/#servicios' },
+    { name: 'Contáctanos', href: '/#contacto' }
   ]
 
   return (
@@ -25,10 +68,10 @@ const Footer = () => {
               Nos encargamos de todo!
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
+              <a href="#" className="text-gray-300 hover:text-red-500 transition-colors">
                 <Facebook size={24} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-yellow-400 transition-colors">
+              <a href="#" className="text-gray-300 hover:text-red-500 transition-colors">
                 <Instagram size={24} />
               </a>
             </div>
@@ -40,12 +83,27 @@ const Footer = () => {
             <ul className="space-y-2">
               {menuItems.map((item) => (
                 <li key={item.name}>
-                  <Link 
-                    to={item.href} 
-                    className="text-gray-300 hover:text-yellow-400 transition-colors"
-                  >
-                    {item.name}
-                  </Link>
+                  {item.href.startsWith('/#') ? (
+                    <button
+                      onClick={() => handleNavClick(item.href)}
+                      className="text-gray-300 hover:text-red-500 transition-colors text-left"
+                    >
+                      {item.name}
+                    </button>
+                  ) : (
+                    <Link 
+                      to={item.href}
+                      onClick={() => {
+                        // Reset scroll position for new page navigation
+                        if (item.href !== '/') {
+                          window.scrollTo(0, 0)
+                        }
+                      }}
+                      className="text-gray-300 hover:text-red-500 transition-colors"
+                    >
+                      {item.name}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
@@ -56,21 +114,21 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Contactos</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <Phone size={18} className="text-yellow-400" />
+                <Phone size={18} className="text-red-500" />
                 <div>
                   <p>WhatsApp / Llamadas:</p>
                   <p className="font-semibold">+56 9 8284 4632 / +569 8700 5952</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail size={18} className="text-yellow-400" />
+                <Mail size={18} className="text-red-500" />
                 <div>
                   <p>Correo electrónico:</p>
                   <p className="font-semibold">contacto@mipatio.cl</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">
-                <MapPin size={18} className="text-yellow-400" />
+                <MapPin size={18} className="text-red-500" />
                 <div>
                   <p>Dirección:</p>
                   <p className="font-semibold">Carlos Condell 117, La Cisterna</p>

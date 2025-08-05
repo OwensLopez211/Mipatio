@@ -1,7 +1,12 @@
 import { motion } from 'framer-motion'
 import { Play, Heart, Star } from 'lucide-react'
+import { useEffect } from 'react'
 
 const Gallery = () => {
+  // Reset scroll position when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     animate: { opacity: 1, y: 0 },
@@ -19,50 +24,38 @@ const Gallery = () => {
   const galleryImages = [
     {
       id: 1,
-      src: "https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Niños celebrando cumpleaños con globos coloridos",
-      category: "Celebraciones"
-    },
-    {
-      id: 2,
-      src: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      alt: "Juegos inflables para niños",
+      src: "/img1.jpg",
+      alt: "Juegos inflables - Tobogán gigante",
       category: "Juegos Inflables"
     },
     {
+      id: 2,
+      src: "/img2.jpg",
+      alt: "Salón de fiestas decorado",
+      category: "Instalaciones"
+    },
+    {
       id: 3,
-      src: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Mesa de cumpleaños con decoraciones temáticas",
-      category: "Decoraciones"
+      src: "/img3.jpg",
+      alt: "Celebración con ambiente festivo",
+      category: "Celebraciones"
     },
     {
       id: 4,
-      src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+      src: "/img4.jpeg",
+      alt: "Mesa de cumpleaños temática",
+      category: "Decoraciones"
+    },
+    {
+      id: 5,
+      src: "/img5.jpg",
       alt: "Niños jugando y divirtiéndose",
       category: "Diversión"
     },
     {
-      id: 5,
-      src: "https://images.unsplash.com/photo-1555525538-a2f2de0f3e64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Torta de cumpleaños personalizada",
-      category: "Tortas"
-    },
-    {
       id: 6,
-      src: "https://images.unsplash.com/photo-1529103043897-ce4531c6c2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Ambiente festivo con luces y decoraciones",
-      category: "Ambiente"
-    },
-    {
-      id: 7,
-      src: "https://images.unsplash.com/photo-1607043913087-a8c03d9b5edf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Actividades y juegos organizados",
-      category: "Actividades"
-    },
-    {
-      id: 8,
-      src: "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
-      alt: "Sonrisas y felicidad en cada celebración",
+      src: "/img6.jpg",
+      alt: "Fiesta con ambiente familiar",
       category: "Momentos Especiales"
     }
   ]
@@ -76,7 +69,7 @@ const Gallery = () => {
       className="min-h-screen"
     >
       {/* Hero Section */}
-      <section className="bg-blue-900 text-white py-20 pt-60">
+      <section className="bg-blue-900 text-white py-20 pt-44">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -91,125 +84,130 @@ const Gallery = () => {
         </div>
       </section>
 
-      {/* Gallery Grid */}
-      <section className="py-20 bg-gray-50">
+      {/* Gallery Grid - Diseño Mosaico */}
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Primera fila - Mosaico principal */}
           <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-8"
           >
-            {galleryImages.map((image, index) => (
+            {/* Imagen grande izquierda */}
+            <motion.div
+              variants={fadeInUp}
+              className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+            >
+              <div className="h-full overflow-hidden">
+                <img
+                  src={galleryImages[0].src}
+                  alt={galleryImages[0].alt}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+                  }}
+                />
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="inline-block bg-yellow-400 text-blue-900 text-sm font-semibold px-3 py-1 rounded-full mb-3">
+                    {galleryImages[0].category}
+                  </span>
+                  <p className="text-white text-lg font-medium">{galleryImages[0].alt}</p>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Grid derecho - 4 imágenes pequeñas */}
+            <div className="grid grid-cols-2 gap-4 h-full">
+              {galleryImages.slice(1, 5).map((image, index) => (
+                <motion.div
+                  key={image.id}
+                  variants={fadeInUp}
+                  className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
+                >
+                  <div className="h-full overflow-hidden">
+                    <img
+                      src={image.src}
+                      alt={image.alt}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      onError={(e) => {
+                        const fallbacks = [
+                          "https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                          "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                          "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                          "https://images.unsplash.com/photo-1555525538-a2f2de0f3e64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                        ]
+                        e.target.src = fallbacks[index] || fallbacks[0]
+                      }}
+                    />
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-3 left-3 right-3">
+                      <span className="inline-block bg-yellow-400 text-blue-900 text-xs font-semibold px-2 py-1 rounded-full mb-2">
+                        {image.category}
+                      </span>
+                      <p className="text-white text-sm">{image.alt}</p>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Separador con texto */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center py-12"
+          >
+            <div className="bg-gray-800 text-white py-4 px-8 rounded-lg inline-block">
+              <p className="text-lg font-medium">Porque la presentación es importante para el recuerdo</p>
+            </div>
+          </motion.div>
+
+          {/* Segunda fila - Imágenes restantes */}
+          <motion.div
+            variants={staggerContainer}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4"
+          >
+            {galleryImages.slice(4, 6).map((image, index) => (
               <motion.div
                 key={image.id}
                 variants={fadeInUp}
                 className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="aspect-square overflow-hidden">
+                <div className="h-full overflow-hidden">
                   <img
                     src={image.src}
                     alt={image.alt}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    onError={(e) => {
+                      const fallbacks = [
+                        "https://images.unsplash.com/photo-1529103043897-ce4531c6c2b5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80",
+                        "https://images.unsplash.com/photo-1607043913087-a8c03d9b5edf?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80"
+                      ]
+                      e.target.src = fallbacks[index] || fallbacks[0]
+                    }}
                   />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <div className="absolute bottom-4 left-4 right-4">
-                    <span className="inline-block bg-yellow-400 text-blue-900 text-xs font-semibold px-2 py-1 rounded-full mb-2">
+                    <span className="inline-block bg-yellow-400 text-blue-900 text-sm font-semibold px-3 py-1 rounded-full mb-3">
                       {image.category}
                     </span>
-                    <p className="text-white text-sm">{image.alt}</p>
+                    <p className="text-white text-base">{image.alt}</p>
                   </div>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-blue-900">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-white mb-6">Nuestros números hablan</h2>
-            <p className="text-xl text-blue-100">Años de experiencia creando momentos inolvidables</p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-center"
-            >
-              <div className="bg-yellow-400 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Heart className="text-blue-900" size={32} />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-2">500+</h3>
-              <p className="text-blue-100">Celebraciones exitosas</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-center"
-            >
-              <div className="bg-yellow-400 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Star className="text-blue-900" size={32} />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-2">14+</h3>
-              <p className="text-blue-100">Años de experiencia</p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-center"
-            >
-              <div className="bg-yellow-400 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
-                <Play className="text-blue-900" size={32} />
-              </div>
-              <h3 className="text-3xl font-bold text-white mb-2">100%</h3>
-              <p className="text-blue-100">Satisfacción garantizada</p>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 bg-yellow-400">
-        <div className="max-w-4xl mx-auto text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <h2 className="text-4xl md:text-5xl font-bold text-blue-900 mb-6">
-              ¿Quieres que tu celebración aparezca aquí?
-            </h2>
-            <p className="text-xl text-blue-800 mb-8 max-w-2xl mx-auto">
-              Cada evento es único y especial. Permítenos crear momentos mágicos para tu familia.
-            </p>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-blue-900 hover:bg-blue-800 text-white font-bold py-4 px-8 rounded-full text-lg transition-colors duration-200"
-            >
-              Reservar mi celebración
-            </motion.button>
           </motion.div>
         </div>
       </section>
